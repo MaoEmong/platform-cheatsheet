@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform 발표 대본 — 슬라이드 ① 진입·계정</title>
+<style>
+  :root{
+    --bg:#0f1117; --card:#1a1d27; --card2:#21252f; --line:#2c313d;
+    --text:#e7e9ee; --muted:#9aa3b2; --accent:#6ea8fe; --accent2:#7ee0c0;
+    --add:#7ee0c0; --warn:#ff8a8a; --star:#ffcb47;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+    line-height:1.75; padding:32px 16px;
+  }
+  .wrap{max-width:880px; margin:0 auto;}
+  header{border-left:5px solid var(--accent); padding:8px 0 8px 18px; margin-bottom:8px;}
+  header h1{margin:0 0 6px; font-size:24px;}
+  header .sub{color:var(--muted); font-size:14px; margin:2px 0;}
+  .nav{margin:14px 0; font-size:14px;}
+  .nav a{color:var(--accent); text-decoration:none; border:1px solid var(--line); padding:5px 12px; border-radius:18px;}
+  .nav a:hover{border-color:var(--accent);}
+  .warnbar{
+    background:#2a1818; border:1px solid #5a2727; border-radius:10px;
+    padding:12px 16px; margin:16px 0; font-size:14px;
+  }
+  .warnbar b{color:var(--warn);}
+  .meta{color:var(--muted); font-size:13px; margin:6px 0 0;}
+  section{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:20px 24px; margin:18px 0;
+  }
+  section h2{
+    margin:0 0 12px; font-size:18px; border-bottom:1px solid var(--line); padding-bottom:10px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .num{
+    background:var(--accent); color:#0f1117; font-weight:700; font-size:13px;
+    min-width:24px; height:24px; padding:0 7px; border-radius:7px; display:inline-flex;
+    align-items:center; justify-content:center;
+  }
+  .speak{font-size:16px; margin:4px 0 14px;}
+  .speak .hl{color:var(--accent2); font-weight:600;}
+  .add{
+    background:#16241f; border:1px solid #265043; border-radius:10px;
+    padding:12px 16px 12px; margin-top:10px;
+  }
+  .add .label{color:var(--add); font-weight:700; font-size:13px; display:block; margin-bottom:6px;}
+  .add ul{margin:0; padding-left:18px;}
+  .add li{margin:6px 0; color:var(--text); font-size:14.5px;}
+  .closing{font-size:16px;}
+  .qa h2 .num{background:var(--star); color:#0f1117;}
+  .qa ul{padding-left:18px; margin:6px 0;}
+  .qa li{margin:7px 0;}
+  .qa .q{color:var(--star); font-weight:600;}
+  .qa .a{color:var(--accent2);}
+  .handoff{color:var(--muted); font-style:italic; font-size:14px; margin-top:6px;}
+  footer{color:var(--muted); font-size:13px; text-align:center; margin:28px 0 8px;}
+  @media print{
+    body{background:#fff; color:#111; padding:0;}
+    section,.warnbar{break-inside:avoid;}
+    .nav{display:none;}
+    section{border-color:#ccc; background:#fff;}
+    .add{background:#f1faf6; border-color:#bfe3d5;}
+    .speak .hl{color:#0a7a55;} .num{background:#2b6cff;} header{border-color:#2b6cff;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Platform 발표 대본 — 슬라이드 ① 진입·계정</h1>
+    <div class="sub">발표자: 김해준 (트랙 A) · 이 슬라이드 분량 약 3~4분</div>
+  </header>
+
+  <div class="nav"><a href="./">← 치트시트 보기</a></div>
+
+  <div class="warnbar">
+    <b>⚠️ 발표 시 주의</b> — JWT는 "암호화"가 아니라 <b>서명</b>, 비밀번호는 "암호화"가 아니라 <b>해시</b>.
+    <div class="meta">자연스러운 본인 멘트 + ➕(화면엔 없지만 말로 덧붙이면 좋은 깊이) 구성. 하브루타노트·트러블슈팅은 직접 멘트 예정이라 제외.</div>
+  </div>
+
+  <section>
+    <h2><span class="num">①</span> 도입 + 인증·테넌트</h2>
+    <p class="speak">이번 팀 프로젝트에서 platform 서비스를 담당한 김해준입니다. 제가 맡은 도메인은 크게 다섯 종류로 나뉩니다.</p>
+    <p class="speak">저희 서비스는 이메일 로그인과 OAuth 로그인, 두 가지 방식을 지원합니다. OAuth는 구글·깃허브·애플 세 가지만 지원하는데, 카카오나 네이버를 넣지 않은 이유가 있습니다. 기획 당시 타겟층을 일반인이 아니라 <span class="hl">개발자·취업준비자·학생</span>으로 잡았고, 이런 분들은 대부분 저 세 계정 중 최소 하나는 가지고 있을 거라고 봤습니다. 또 저희는 향후 <span class="hl">글로벌 서비스</span>를 목표로 하기 때문에, 해외에서 잘 쓰지 않는 카카오·네이버는 제외했습니다.</p>
+    <p class="speak">인증은 <span class="hl">JWT를 비대칭키로 서명</span>해서 구현했고, <span class="hl">OTP 앱 기반 2단계 인증(MFA)</span>도 추가했습니다. 테넌트 기반 시스템도 별도로 마련해 뒀습니다. 역할은 일반 사용자와 관리자 두 가지인데, 기본값은 일반 사용자이고 <span class="hl">관리자는 DB에서 직접 역할을 부여해야만</span> 접속할 수 있도록 막아 뒀습니다.</p>
+    <div class="add"><span class="label">➕ 덧붙이기</span>
+      <ul>
+        <li>"비대칭키라 platform만 비밀키로 서명하고, 다른 서비스들은 공개키로 검증만 합니다. 키를 공유하지 않아도 돼서 더 안전합니다."</li>
+        <li>"관리자 자동 가입 경로를 일부러 만들지 않은 것 자체가 보안 조치입니다."</li>
+        <li>"비밀번호는 원문이 아니라 BCrypt 해시로만 저장해서, DB가 유출돼도 복원할 수 없습니다."</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">②</span> 결제</h2>
+    <p class="speak">두 번째는 결제입니다. 결제는 Stripe를 연동했고, Free·Pro·Team 세 가지 구독 플랜을 지원합니다. 사용자는 자신의 결제 이력과 영수증, 그리고 사용량을 조회할 수 있습니다.</p>
+    <div class="add"><span class="label">➕ 덧붙이기</span>
+      <ul>
+        <li>"Stripe를 고른 가장 큰 이유는 보안입니다. 카드 번호 같은 민감 정보를 저희 서버가 아예 받지도, 저장하지도 않고 Stripe가 처리합니다. 덕분에 까다로운 카드 보안 규정인 PCI 부담을 Stripe가 대신 지게 됩니다."</li>
+        <li>"결제 완료 통지는 Stripe가 보내주는데, 이 통지의 서명을 검증해서 위조된 요청을 거르고, 같은 통지가 중복으로 와도 한 번만 처리되도록 했습니다."</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">③</span> 알림</h2>
+    <p class="speak">세 번째는 알림입니다. 알림 인박스를 두고, 모바일 푸시인 FCM과 이메일인 SES, 두 채널로 발송합니다. 다른 서비스가 보낸 알림 요청 이벤트를 받아서 처리하는 구조고요. 읽지 않은 알림은 배지로 표시하고, 알림을 누르면 해당 화면으로 이동하는 클릭 라우팅까지 구현했습니다.</p>
+    <div class="add"><span class="label">➕ 덧붙이기</span>
+      <ul>
+        <li>"같은 알림이 두 번 발송되지 않도록 멱등성 처리를 했고, 발송에 실패하면 <span style="color:var(--add)">최대 3회까지 재시도</span>한 뒤, 그래도 실패하면 해당 알림을 실패 상태로 기록해 둡니다."</li>
+        <li>"사용자가 알림을 켜고 끄거나, 방해 금지 시간대를 설정할 수도 있습니다."</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">④</span> 감사 · 관리자</h2>
+    <p class="speak">네 번째는 감사 로그와 관리자 기능입니다. <span class="hl">회원가입, 노트 생성·수정, 카드 복습 완료, 배지 획득·레벨업, 알림 발송</span>처럼 각 서비스에서 일어나는 주요 활동 이벤트를 받아서 <span class="hl">감사 로그로 90일간 보존</span>합니다. 그리고 GDPR 같은 개인정보 규제에 대응하기 위해, 사용자가 <span class="hl">자기 데이터를 내보내거나 계정 삭제를 요청</span>할 수 있게 했습니다. 관리자용으로는 시스템 설정과 분석 API를 제공합니다.</p>
+    <div class="add"><span class="label">➕ 덧붙이기</span>
+      <ul>
+        <li>"GDPR은 EU의 개인정보보호 규정인데, 글로벌 서비스를 목표로 하다 보니 데이터 열람·삭제 권리를 지원하는 게 필수였습니다."</li>
+        <li>"감사 로그가 남기 때문에, 누가 언제 무엇을 했는지 추적할 수 있어서 보안 사고 대응에도 쓰입니다."</li>
+        <li>"관리자 API는 당연히 관리자 권한이 있는 사람만 접근할 수 있도록 막아 뒀습니다."</li>
+        <li><b>(받는 이벤트는 총 7종)</b></li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">⑤</span> 이벤트</h2>
+    <p class="speak">마지막은 이벤트 처리입니다. 회원가입이 일어나면 회원가입 이벤트를 발행하는데, 여기에 <span class="hl">Transactional Outbox 패턴</span>을 적용했습니다. DB 저장과 이벤트 발행을 같은 트랜잭션으로 묶어서, 둘 중 하나만 실행되는 메시지 유실을 방지하는 방식입니다.</p>
+    <div class="add"><span class="label">➕ 덧붙이기</span>
+      <ul>
+        <li>"이렇게 발행된 회원가입 이벤트는 platform의 감사 모듈이 다시 구독해서 감사 로그에 기록합니다. 즉 발행과 소비가 같은 Kafka 파이프라인을 타기 때문에, 나중에 서비스가 분리돼도 그대로 동작합니다."</li>
+        <li>"받는 쪽에서도 이벤트 고유 ID로 중복 처리를 막기 때문에, 같은 이벤트가 두 번 들어와도 안전합니다."</li>
+        <li>"이런 이벤트 방식 덕분에 서비스끼리 직접 호출로 엮이지 않아서, 한 서비스에 문제가 생겨도 다른 서비스가 독립적으로 동작합니다."</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="num">✓</span> 마무리</h2>
+    <p class="speak closing">정리하면 platform은 인증·결제·알림·감사를 아우르는 시스템의 관문이고, 저는 기능 구현뿐 아니라 <span class="hl">토큰 보안, 비밀번호 해싱, 결제 정보 비저장, 이벤트 유실 방지</span>까지 신경 써서 설계했습니다.</p>
+    <p class="handoff">(→ 이어서 하브루타노트 / 트러블슈팅은 직접 멘트)</p>
+  </section>
+
+  <section class="qa">
+    <h2><span class="num">Q</span> Q&amp;A 대비 (외워두기)</h2>
+    <ul>
+      <li><span class="q">토큰 탈취되면?</span> → <span class="a">Access 15분으로 짧게 + Refresh는 해시 저장 + 한 번 쓰면 회전, 재사용 시 차단</span></li>
+      <li><span class="q">비밀번호 저장?</span> → <span class="a">BCrypt 해시(암호화 아님), 원문 저장 안 함</span></li>
+      <li><span class="q">JWT 왜 비대칭키?</span> → <span class="a">서명은 platform만(비밀키), 검증은 다른 서비스가(공개키) — 키 공유 불필요</span></li>
+      <li><span class="q">로그아웃은?</span> → <span class="a">Refresh 토큰 삭제로 갱신 차단, Access는 곧 만료</span></li>
+      <li><span class="q">MFA 방식?</span> → <span class="a">OTP 앱 기반(TOTP) + 백업 코드. 이메일은 비밀번호 재설정용</span></li>
+      <li><span class="q">Transactional Outbox가 뭔데?</span> → <span class="a">DB 저장 + 이벤트 발행을 한 트랜잭션으로 묶어 유실 방지</span></li>
+      <li><span class="q">platform은 무슨 이벤트를 발행/소비?</span> → <span class="a">발행은 회원가입 1종, 소비는 감사용 7종(회원가입·노트생성/수정·복습완료·배지·레벨업·알림발송)</span></li>
+      <li><span class="q">회원가입 이벤트는 어디서 소비?</span> → <span class="a">platform의 감사 모듈이 같은 Kafka 토픽을 구독해 audit_logs에 기록(발행→자기 소비 구조)</span></li>
+      <li><span class="q">알림 재시도 간격?</span> → <span class="a">재시도할수록 간격이 늘어나는 backoff 방식</span></li>
+      <li><span class="q">테넌트 격리?</span> → <span class="a">DB 정책(RLS) + 애플리케이션 필터 이중 방어</span></li>
+      <li><span class="q">왜 카카오 안 했나?</span> → <span class="a">타겟이 개발자·학생 + 글로벌 목표, 카카오는 확장 시 추가</span></li>
+    </ul>
+  </section>
+
+  <footer>Platform 발표 대본 · Synapse 팀프로젝트 · Ctrl/⌘+P 로 인쇄 가능 · <a href="./" style="color:var(--accent);">치트시트</a></footer>
+
+</div>
+</body>
+</html>
