@@ -239,4 +239,26 @@
       <p class="a">Access 토큰은 서버가 안 들고 있어서 만료 전 강제 차단이 어렵다. → 로그아웃 시 <span class="hl">Refresh 토큰을 삭제</span>해 갱신을 막는다. Access는 15분이라 곧 만료되고, 즉시 차단이 필요하면 세션 무효화로 막는다.</p></div>
 
     <div class="qa"><div class="q star">Q. 테넌트(tenant)가 뭐예요?</div>
-      <p cl
+      <p class="a">가입하면 사용자마다 개인 작업공간(테넌트)이 하나 생김. 팀 플랜에선 여러 명이 한 테넌트 공유. <b>보안 포인트</b>: 각 테넌트 데이터는 격리돼 A가 B의 데이터를 절대 못 본다. <span class="hl">DB 정책(RLS) + 애플리케이션 필터로 이중 방어</span>. (격리 깨짐 = 데이터 유출)</p></div>
+
+    <div class="qa"><div class="q">Q. 비밀번호 재설정은 안전한가?</div>
+      <p class="a">이메일로 일회용 코드 발송 → 본인 확인 → 재설정. 코드는 일정 시간 후 만료되고, 검증 성공해야만 새 비밀번호 설정용 토큰이 발급된다.</p></div>
+
+    <div class="qa"><div class="q">Q. JWT 안에는 뭐가 들어있나?</div>
+      <p class="a">사용자 ID, 권한(roles), 만료 시각, 발급자. <span class="danger">비밀번호 등 민감정보는 절대 안 넣는다</span>(디코딩하면 내용이 보임). 위변조는 서명으로 막는다.</p></div>
+
+    <div class="qa"><div class="q">Q. 테스트·검증은 어떻게 했나?</div>
+      <p class="a">단위 테스트 + Testcontainers(실제 DB/Redis를 컨테이너로 띄워 통합 테스트) + 인증/결제 E2E 테스트. 모듈 경계도 자동 검증 테스트로 확인.</p></div>
+
+    <div class="qa"><div class="q">Q. 개인정보는 얼마나 수집하나?</div>
+      <p class="a">필요한 최소한만. 소셜 로그인에서도 이메일·이름·식별자 정도만 받고 안 쓰는 정보는 저장 안 함(최소 수집 원칙).</p></div>
+
+    <div class="qa"><div class="q">Q. 구독을 취소하면?</div>
+      <p class="a">Stripe가 구독 종료를 통지하면 해당 사용자의 유료 기능 접근 권한을 회수한다.</p></div>
+  </section>
+
+  <footer>Platform 서비스 발표 대비 · Synapse 팀프로젝트 · 브라우저에서 Ctrl/⌘+P 로 인쇄 가능</footer>
+
+</div>
+</body>
+</html>
